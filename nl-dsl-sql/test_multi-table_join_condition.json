@@ -1,0 +1,167 @@
+{
+  "originalQuery": "查询订单金额大于100的用户名",
+  "sql": "SELECT users.*, orders.* FROM users INNER JOIN orders ON orders.user_id = users.id WHERE 查询订单金额 > '100的用户名' LIMIT 300",
+  "dslJson": "{\r\n  \"operation\" : \"SELECT\",\r\n  \"tables\" : [ \"users\", \"orders\" ],\r\n  \"fields\" : [ \"users.*\", \"orders.*\" ],\r\n  \"conditions\" : [ {\r\n    \"field\" : \"查询订单金额\",\r\n    \"operator\" : \">\",\r\n    \"value\" : \"100的用户名\",\r\n    \"logical\" : \"AND\"\r\n  } ],\r\n  \"joins\" : [ {\r\n    \"joinType\" : \"INNER JOIN\",\r\n    \"fromTable\" : \"orders\",\r\n    \"fromField\" : \"user_id\",\r\n    \"toTable\" : \"users\",\r\n    \"toField\" : \"id\"\r\n  } ],\r\n  \"groupBy\" : [ ],\r\n  \"orderBy\" : [ ],\r\n  \"limit\" : 300,\r\n  \"aggregations\" : [ ],\r\n  \"annotations\" : {\r\n    \"original_query\" : \"查询订单金额大于100的用户名\",\r\n    \"confidence\" : 1.0,\r\n    \"reasoning\" : \"操作类型: SELECT; 查询表: users, orders; 查询字段: *; 查询条件: 查询订单金额 > 100的用户名; 表关联: orders.user_id = users.id\",\r\n    \"intent\" : \"SELECT\"\r\n  }\r\n}",
+  "explanation": "操作类型: SELECT; 查询表: users, orders; 查询字段: *; 查询条件: 查询订单金额 > 100的用户名; 表关联: orders.user_id = users.id",
+  "success": true,
+  "error": null,
+  "errorType": null,
+  "duration": 118.0,
+  "validationErrors": [],
+  "metadata": {
+    "preprocessed": {
+      "tables": [
+        "users",
+        "orders"
+      ],
+      "original_query": "查询订单金额大于100的用户名",
+      "normalized_query": "查询订单金额大于100的用户名",
+      "context": {
+        "tables": [
+          "users",
+          "orders"
+        ],
+        "query": "查询订单金额大于100的用户名",
+        "intent": "SELECT"
+      },
+      "fields": [],
+      "intent": "SELECT"
+    },
+    "semantic_result": {
+      "joins": [
+        {
+          "to_field": "id",
+          "to_table": "users",
+          "from_field": "user_id",
+          "from_table": "orders",
+          "type": "INNER JOIN"
+        }
+      ],
+      "relationships": {
+        "indirect_relations": [],
+        "direct_relations": [
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "addresses"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "orders"
+          },
+          {
+            "to_field": "id",
+            "to_table": "addresses",
+            "from_field": "address_id",
+            "from_table": "orders"
+          },
+          {
+            "to_field": "id",
+            "to_table": "orders",
+            "from_field": "order_id",
+            "from_table": "order_items"
+          },
+          {
+            "to_field": "id",
+            "to_table": "orders",
+            "from_field": "order_id",
+            "from_table": "payments"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "payments"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "user_coupons"
+          },
+          {
+            "to_field": "id",
+            "to_table": "orders",
+            "from_field": "order_id",
+            "from_table": "user_coupons"
+          },
+          {
+            "to_field": "id",
+            "to_table": "orders",
+            "from_field": "order_id",
+            "from_table": "product_reviews"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "product_reviews"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "shopping_carts"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "product_favorites"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "user_behaviors"
+          },
+          {
+            "to_field": "id",
+            "to_table": "orders",
+            "from_field": "order_id",
+            "from_table": "stock_logs"
+          }
+        ]
+      },
+      "tables": [
+        "users",
+        "orders"
+      ],
+      "limit": 300,
+      "order_by": null,
+      "group_by": [],
+      "fields": [],
+      "conditions": [
+        {
+          "field": "查询订单金额",
+          "value": "100的用户名",
+          "operator": ">"
+        }
+      ],
+      "intent": "SELECT",
+      "aggregations": [],
+      "raw_parsing": {
+        "tables": [
+          "users",
+          "orders"
+        ],
+        "limit": 300,
+        "order_by": null,
+        "group_by": [],
+        "fields": [],
+        "conditions": [
+          {
+            "field": "查询订单金额",
+            "value": "100的用户名",
+            "operator": ">"
+          }
+        ],
+        "intent": "SELECT",
+        "aggregations": []
+      }
+    }
+  }
+}

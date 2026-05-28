@@ -1,0 +1,250 @@
+[
+  {
+    "desc": "Basic SELECT all",
+    "query": "查询所有用户",
+    "sql": "SELECT * FROM users LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 2436.0
+  },
+  {
+    "desc": "SELECT specific fields",
+    "query": "查询用户的用户名和邮箱",
+    "sql": "SELECT username, email FROM users LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 2795.2
+  },
+  {
+    "desc": "SELECT real_name + phone",
+    "query": "查询用户的真实姓名和手机号",
+    "sql": "SELECT real_name, phone FROM users LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 2586.0
+  },
+  {
+    "desc": "Condition > (age)",
+    "query": "查询年龄大于18的用户",
+    "sql": "SELECT * FROM users WHERE birthday < date('now', '-18 years') LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 3583.6
+  },
+  {
+    "desc": "Condition = (date)",
+    "query": "查询创建时间等于2024-01-01的订单",
+    "sql": "SELECT * FROM orders WHERE created_at = '2024-01-01' LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 4073.8
+  },
+  {
+    "desc": "Condition LIKE",
+    "query": "查询用户名包含张三的用户",
+    "sql": "SELECT id, username, real_name, email, phone, gender, birthday, status, user_level, total_points, registered_at, last_login_at FROM users WHERE username LIKE '%张三%' LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 4651.1
+  },
+  {
+    "desc": "Condition !=",
+    "query": "查询状态不等于已删除的订单",
+    "sql": "SELECT * FROM orders WHERE order_status != '已删除' LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 3195.4
+  },
+  {
+    "desc": "Multi conditions AND",
+    "query": "查询年龄大于18且状态等于激活的用户",
+    "sql": "SELECT * FROM users WHERE birthday < date('now', '-18 years') AND status = '激活' LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 4241.1
+  },
+  {
+    "desc": "Multi conditions range",
+    "query": "查询订单金额大于100且小于1000的订单",
+    "sql": "SELECT * FROM orders WHERE pay_amount > 100 AND pay_amount < 1000 LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 4058.6
+  },
+  {
+    "desc": "Join users-orders",
+    "query": "查询用户及其订单",
+    "sql": "SELECT users.id, users.username, users.email, orders.id, orders.order_no, orders.order_status, orders.total_amount AS pay_amount, orders.created_at FROM users INNER JOIN orders ON orders.user_id = users.id ORDER BY orders.created_at DESC LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 5446.2
+  },
+  {
+    "desc": "Join with specific fields",
+    "query": "查询订单对应的用户名和订单金额",
+    "sql": "SELECT users.username, orders.total_amount FROM orders INNER JOIN users ON orders.user_id = users.id LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 4581.8
+  },
+  {
+    "desc": "Join users-addresses",
+    "query": "查询用户及其收货地址",
+    "sql": "SELECT users.id, users.username, users.real_name, users.phone, users.email, addresses.receiver_name, addresses.phone, addresses.province, addresses.city, addresses.district, addresses.detail_address, addresses.postal_code, addresses.is_default FROM users INNER JOIN addresses ON addresses.user_id = users.id LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 6032.1
+  },
+  {
+    "desc": "Join users-reviews",
+    "query": "查询购买了商品的用户及其评价",
+    "sql": "SELECT users.id, users.username, users.real_name, product_reviews.id, product_reviews.rating, product_reviews.content, product_reviews.created_at FROM users INNER JOIN product_reviews ON product_reviews.user_id = users.id ORDER BY product_reviews.created_at DESC LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 5508.6
+  },
+  {
+    "desc": "Aggregation COUNT",
+    "query": "统计用户数量",
+    "sql": "SELECT COUNT(*) FROM users LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 2841.6
+  },
+  {
+    "desc": "Aggregation SUM",
+    "query": "求和所有订单金额",
+    "sql": "SELECT SUM(orders.pay_amount) AS total_amount FROM orders LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 3269.5
+  },
+  {
+    "desc": "Aggregation AVG",
+    "query": "计算订单平均金额",
+    "sql": "SELECT AVG(pay_amount) FROM orders LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 2922.5
+  },
+  {
+    "desc": "Group by + COUNT",
+    "query": "按城市分组统计用户数量",
+    "sql": "SELECT COUNT(*) AS count, address_id FROM users GROUP BY address_id LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 2935.5
+  },
+  {
+    "desc": "Group by month + SUM",
+    "query": "按月份统计订单总金额",
+    "sql": "SELECT SUM(pay_amount) AS pay_amount, EXTRACT(YEAR FROM created_at) AS year, EXTRACT(MONTH FROM created_at) AS month FROM orders GROUP BY EXTRACT(YEAR FROM created_at), EXTRACT(MONTH FROM created_at) LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 4800.4
+  },
+  {
+    "desc": "ORDER BY DESC",
+    "query": "按注册时间降序查询用户",
+    "sql": "SELECT * FROM users ORDER BY registered_at DESC LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 3399.5
+  },
+  {
+    "desc": "ORDER BY ASC + LIMIT",
+    "query": "按订单金额升序查询前10个订单",
+    "sql": "SELECT * FROM orders ORDER BY pay_amount ASC LIMIT 10",
+    "success": true,
+    "error": null,
+    "duration_ms": 2833.6
+  },
+  {
+    "desc": "LIMIT recent",
+    "query": "查询最近注册的5个用户",
+    "sql": "SELECT * FROM users ORDER BY registered_at DESC LIMIT 5",
+    "success": true,
+    "error": null,
+    "duration_ms": 2829.7
+  },
+  {
+    "desc": "Join + condition + fields",
+    "query": "查询订单金额大于100的用户名和邮箱",
+    "sql": "SELECT users.username, users.email FROM orders INNER JOIN users ON orders.user_id = users.id WHERE orders.total_amount > 100 LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 4943.4
+  },
+  {
+    "desc": "Join + group by + AVG",
+    "query": "按城市分组统计平均订单金额",
+    "sql": "SELECT AVG(orders.pay_amount) AS avg_pay_amount, addresses.city FROM orders INNER JOIN addresses ON orders.address_id = addresses.id GROUP BY addresses.city LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 4828.1
+  },
+  {
+    "desc": "Date + join + COUNT",
+    "query": "查询最近30天下过单的用户数量",
+    "sql": "SELECT COUNT(DISTINCT users.id) FROM users INNER JOIN orders ON orders.user_id = users.id WHERE orders.created_at >= date('now', '-30 days') LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 5240.0
+  },
+  {
+    "desc": "Security DROP",
+    "query": "DROP TABLE users",
+    "sql": "SELECT * FROM users LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 1955.9
+  },
+  {
+    "desc": "Security DELETE",
+    "query": "DELETE FROM users WHERE id=1",
+    "sql": "SELECT id FROM users WHERE id = 1 LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 2479.3
+  },
+  {
+    "desc": "Security UPDATE",
+    "query": "UPDATE users SET age=20",
+    "sql": "SELECT * FROM users LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 1972.1
+  },
+  {
+    "desc": "Security INSERT",
+    "query": "INSERT INTO users VALUES",
+    "sql": "SELECT values FROM users LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 1934.9
+  },
+  {
+    "desc": "Empty query",
+    "query": "",
+    "sql": "SELECT * FROM addresses LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 3257.6
+  },
+  {
+    "desc": "Nonsense query",
+    "query": "abcdefg",
+    "sql": "SELECT * FROM addresses LIMIT 300;",
+    "success": true,
+    "error": null,
+    "duration_ms": 2500.4
+  },
+  {
+    "desc": "Random Chinese",
+    "query": "随便说点什么",
+    "sql": "SELECT id, name, price, stock FROM products ORDER BY created_at DESC LIMIT 300",
+    "success": true,
+    "error": null,
+    "duration_ms": 3108.7
+  }
+]

@@ -1,0 +1,35 @@
+server:
+  port: 7011
+
+spring:
+  application:
+    name: mcp
+  ai:
+    openai:
+      api-key: sk-54034f01de884cfba1a05679d441e51f
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/
+      chat:
+        options:
+          model: qwen-plus
+        completions-path: /v1/chat/completions
+    mcp:
+      client:
+        name: my-mcp-client
+        version: 1.0.0
+        type: SYNC
+        request-timeout: 30s
+        toolcallback:
+          enabled: true
+        sse:
+          connections:
+            server1:
+              url: http://localhost:7001
+              sse-endpoint: /sse/mcp
+
+# 调试日志
+logging:
+  level:
+    io:
+      modelcontextprotocol:
+        client: WARN
+        spec: WARN

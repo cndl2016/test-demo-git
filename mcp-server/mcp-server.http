@@ -1,0 +1,10 @@
+# MCP Server API
+
+### MCP Server Show Available Tools
+GET http://127.0.0.1:7001/mcp/server/showAvailableTools
+
+### MCP Server Add Tool By Class Sync
+GET http://127.0.0.1:7001/mcp/server/addToolByClassSync?className=mathTool
+
+### MCP Server Remove Tool Sync
+GET http://127.0.0.1:7001/mcp/server/removeToolSync?toolName=getStockInfo

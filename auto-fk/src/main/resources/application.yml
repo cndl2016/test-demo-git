@@ -1,0 +1,18 @@
+server:
+  port: 7786
+
+spring:
+  application:
+    name: auto-fk
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/school_schema
+    username: postgres
+    password: postgres
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000

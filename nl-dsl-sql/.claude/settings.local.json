@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(git clone *)",
+      "Bash(mvn compile *)",
+      "Bash(mvn test *)",
+      "Bash(timeout 15 mvn spring-boot:run -q)",
+      "Bash(mvn spring-boot:run *)",
+      "Bash(curl -s -X POST http://localhost:7789/nl2dslsql/process -H \"Content-Type: application/json\" -d \"{\\\\\"query\\\\\": \\\\\"查询所有用户的用户名和邮箱\\\\\"}\")",
+      "Bash(python -m json.tool)",
+      "Bash(curl *)",
+      "Bash(python *)",
+      "Bash(netstat -ano)",
+      "Bash(awk '{print $5}')",
+      "Bash(taskkill *)",
+      "Bash(cmd *)",
+      "Bash(powershell *)",
+      "Bash(mvn clean *)"
+    ]
+  }
+}

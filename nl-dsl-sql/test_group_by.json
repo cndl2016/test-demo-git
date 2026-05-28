@@ -1,0 +1,115 @@
+{
+  "originalQuery": "按城市分组统计用户数量",
+  "sql": "SELECT COUNT(*) FROM users GROUP BY 城市 LIMIT 300",
+  "dslJson": "{\r\n  \"operation\" : \"SELECT\",\r\n  \"tables\" : [ \"users\" ],\r\n  \"fields\" : [ \"*\" ],\r\n  \"conditions\" : [ ],\r\n  \"joins\" : [ ],\r\n  \"groupBy\" : [ \"城市\" ],\r\n  \"orderBy\" : [ ],\r\n  \"limit\" : 300,\r\n  \"aggregations\" : [ \"COUNT\" ],\r\n  \"annotations\" : {\r\n    \"original_query\" : \"按城市分组统计用户数量\",\r\n    \"confidence\" : 1.0,\r\n    \"reasoning\" : \"操作类型: SELECT; 查询表: users; 查询字段: *; 聚合操作: COUNT; 分组字段: 城市\",\r\n    \"intent\" : \"SELECT\"\r\n  }\r\n}",
+  "explanation": "操作类型: SELECT; 查询表: users; 查询字段: *; 聚合操作: COUNT; 分组字段: 城市",
+  "success": true,
+  "error": null,
+  "errorType": null,
+  "duration": 137.0,
+  "validationErrors": [],
+  "metadata": {
+    "preprocessed": {
+      "tables": [
+        "users"
+      ],
+      "original_query": "按城市分组统计用户数量",
+      "normalized_query": "按城市分组统计用户数量",
+      "context": {
+        "tables": [
+          "users"
+        ],
+        "query": "按城市分组统计用户数量",
+        "intent": "SELECT"
+      },
+      "fields": [],
+      "intent": "SELECT"
+    },
+    "semantic_result": {
+      "joins": [],
+      "relationships": {
+        "indirect_relations": [],
+        "direct_relations": [
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "addresses"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "orders"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "payments"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "user_coupons"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "product_reviews"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "shopping_carts"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "product_favorites"
+          },
+          {
+            "to_field": "id",
+            "to_table": "users",
+            "from_field": "user_id",
+            "from_table": "user_behaviors"
+          }
+        ]
+      },
+      "tables": [
+        "users"
+      ],
+      "limit": 300,
+      "order_by": null,
+      "group_by": [
+        "城市"
+      ],
+      "fields": [],
+      "conditions": [],
+      "intent": "SELECT",
+      "aggregations": [
+        "COUNT"
+      ],
+      "raw_parsing": {
+        "tables": [
+          "users"
+        ],
+        "limit": 300,
+        "order_by": null,
+        "group_by": [
+          "城市"
+        ],
+        "fields": [],
+        "conditions": [],
+        "intent": "SELECT",
+        "aggregations": [
+          "COUNT"
+        ]
+      }
+    }
+  }
+}

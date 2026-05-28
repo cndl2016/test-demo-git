@@ -1,0 +1,100 @@
+[
+  {
+    "desc": "Basic SELECT all",
+    "query": "查询所有用户",
+    "sql": "SELECT * FROM users LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "SELECT specific fields",
+    "query": "查询用户的用户名和邮箱",
+    "sql": "SELECT * FROM users LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Condition >",
+    "query": "查询年龄大于18的用户",
+    "sql": "SELECT * FROM users WHERE 查询年龄 > '18的用户' LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Condition =",
+    "query": "查询创建时间等于2024-01-01的订单",
+    "sql": "SELECT * FROM orders WHERE 查询创建时间 = '2024-01-01的订单' LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Condition LIKE",
+    "query": "查询用户名包含张三的用户",
+    "sql": "SELECT * FROM users WHERE 查询用户名 LIKE '%张三的用户%' LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Join + condition",
+    "query": "查询订单金额大于100的用户名",
+    "sql": "SELECT users.*, orders.* FROM users INNER JOIN orders ON orders.user_id = users.id WHERE 查询订单金额 > '100的用户名' LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Simple join",
+    "query": "查询用户及其订单",
+    "sql": "SELECT users.*, orders.* FROM users INNER JOIN orders ON orders.user_id = users.id LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Group by + COUNT",
+    "query": "按城市分组统计用户数量",
+    "sql": "SELECT COUNT(*) FROM users GROUP BY 城市 LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "ORDER BY DESC",
+    "query": "按注册时间降序查询用户",
+    "sql": "SELECT * FROM users ORDER BY 注册时间 DESC LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "LIMIT",
+    "query": "查询前10个用户",
+    "sql": "SELECT * FROM users LIMIT 10",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Security DROP",
+    "query": "DROP TABLE users",
+    "sql": "SELECT * FROM users LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Security DELETE",
+    "query": "DELETE FROM users WHERE id=1",
+    "sql": "SELECT id FROM users LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Security UPDATE",
+    "query": "UPDATE users SET age=20",
+    "sql": "SELECT * FROM users LIMIT 300",
+    "success": true,
+    "error": null
+  },
+  {
+    "desc": "Security INSERT",
+    "query": "INSERT INTO users VALUES",
+    "sql": "SELECT values FROM users LIMIT 300",
+    "success": true,
+    "error": null
+  }
+]

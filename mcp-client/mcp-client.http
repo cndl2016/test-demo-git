@@ -1,0 +1,10 @@
+# MCP Client API
+
+### MCP Client Show Available Tools
+GET http://127.0.0.1:7011/mcp/chat-client/showAvailableTools
+
+### MCP Client Simple Chat
+GET http://127.0.0.1:7011/mcp/chat-client/simple/chat?query=今天苏州天气如何？
+
+### MCP Client Stream Chat
+GET http://127.0.0.1:7011/mcp/chat-client/stream/chat?query=请告诉我上证股票：陕西煤业(601225)今天实时的价格信息
