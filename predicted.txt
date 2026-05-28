@@ -1,0 +1,110 @@
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT count(*) FROM "singer"
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT COUNT("Name") FROM "singer"
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT "Name" ,  "Country" ,  "Age" FROM "singer" ORDER BY "Age" DESC
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT "Name" ,  "Country" ,  "Age" FROM "singer" ORDER BY "Age" DESC
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT AVG("Age") ,  MIN("Age") ,  MAX("Age") FROM "singer" WHERE "Country" = 'France'
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT avg(Age) ,  min(Age) ,  max(Age) FROM singer WHERE "Country"  =  'France'
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT T1.Name ,  T1.Year FROM singer AS T1 JOIN singer_in_concert AS T2 ON T1.Singer_ID  =  T2.Singer_ID ORDER BY T1.Age LIMIT 1
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT t2.Name ,  t2.Song_release_year FROM singer AS t1 JOIN singer_in_concert AS t2 ON t1.Singer_ID  =  t2.Singer_ID WHERE t1.Age  =  (SELECT MIN(Age) FROM singer)
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT DISTINCT "Country" FROM "singer" WHERE "Age"  >  20
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。
+<think>
+
+</think>
+
+您的问题对应的SQL语句是：
+
+```sql
+SELECT DISTINCT "Country" FROM "singer" WHERE "Age"  >  20
+```
+
+执行这段SQL代码将会返回您需要的数据。如果您需要对查询进行修改或有其他问题，请随时告诉我。

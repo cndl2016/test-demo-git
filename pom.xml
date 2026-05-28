@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.dm.cn</groupId>
+    <artifactId>SpringAI</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>SpringAI</name>
+    <description>SpringAI</description>
+    <url/>
+
+    <properties>
+        <!-- Project revision -->
+        <revision>1.0.0</revision>
+        <!-- Java vision -->
+        <java.version>17</java.version>
+        <!-- Spring Boot -->
+        <spring-boot.version>3.4.0</spring-boot.version>
+        <!-- Spring AI -->
+        <spring-ai.version>1.1.4</spring-ai.version>
+    </properties>
+
+    <modules>
+        <module>auto-fk</module>
+        <module>db</module>
+        <module>mcp-client</module>
+        <module>mcp-server</module>
+        <module>ollama</module>
+        <module>openai</module>
+        <module>rag</module>
+        <module>rag-elasticsearch</module>
+        <module>rag-milvus</module>
+        <module>text2sql</module>
+        <module>ocr-jiajia</module>
+        <module>ocr-smart</module>
+        <module>spider</module>
+        <module>nl-dsl-sql</module>
+        <module>stock</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
