@@ -1,0 +1,57 @@
+server:
+  host: localhost
+  port: 7781
+
+spring:
+  application:
+    name: "text2sql"
+
+  #支持MySQL8和PostgreSQL12
+  datasource:
+    url: jdbc:mysql://localhost:3306/text2sql?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&tinyInt1isBit=false&allowLoadLocalInfile=true&allowLocalInfile=true&allowUrl
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+
+  ai:
+    openai:
+      api-key: sk-54034f01de884cfba1a05679d441e51f
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/
+      chat:
+        options:
+          model: qwen-plus
+        completions-path: /v1/chat/completions
+      embedding:
+        base-url: https://dashscope.aliyuncs.com/compatible-mode/
+        options:
+          model: text-embedding-v4
+          dimensions: 1536
+        embeddings-path: /v1/embeddings
+
+    vectorstore:
+      elasticsearch:
+        initialize-schema: true
+        index-name: spring-ai-text2sql
+        similarity: cosine
+        dimensions: 1536
+
+  elasticsearch:
+    uris: http://127.0.0.1:9200

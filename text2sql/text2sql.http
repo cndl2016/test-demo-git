@@ -1,0 +1,27 @@
+# Text2Sql API
+
+### Text2Sql Create Training
+POST http://127.0.0.1:7781/text2sql/createTraining
+-d {
+    "content": "CREATE TABLE dtp_hospital (id BIGINT AUTO_INCREMENT PRIMARY KEY,province VARCHAR(20) DEFAULT NULL,city VARCHAR(20) DEFAULT NULL,reporting_team VARCHAR(50) DEFAULT NULL,district VARCHAR(20) DEFAULT NULL,hospital_name VARCHAR(100) DEFAULT NULL,hospital_code VARCHAR(50) DEFAULT NULL,hospital_address VARCHAR(255) DEFAULT NULL,location VARCHAR(100) DEFAULT NULL,del_flag TINYINT DEFAULT 0,create_by VARCHAR(32) DEFAULT NULL,create_time DATETIME DEFAULT NULL,update_by VARCHAR(32) DEFAULT NULL,update_time DATETIME DEFAULT NULL,image VARCHAR(255) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;ALTER TABLE dtp_hospital COMMENT '医院表';ALTER TABLE dtp_hospital MODIFY COLUMN id BIGINT AUTO_INCREMENT COMMENT '主键';ALTER TABLE dtp_hospital MODIFY COLUMN province VARCHAR(20) DEFAULT NULL COMMENT '省份';ALTER TABLE dtp_hospital MODIFY COLUMN city VARCHAR(20) DEFAULT NULL COMMENT '城市';ALTER TABLE dtp_hospital MODIFY COLUMN reporting_team VARCHAR(50) DEFAULT NULL COMMENT '提报团队';ALTER TABLE dtp_hospital MODIFY COLUMN district VARCHAR(20) DEFAULT NULL COMMENT '区';ALTER TABLE dtp_hospital MODIFY COLUMN hospital_name VARCHAR(100) DEFAULT NULL COMMENT '申请的DTP药房 主要对应的医院名称';ALTER TABLE dtp_hospital MODIFY COLUMN hospital_code VARCHAR(50) DEFAULT NULL COMMENT '申请DTP主要对应的医院code';ALTER TABLE dtp_hospital MODIFY COLUMN hospital_address VARCHAR(255) DEFAULT NULL COMMENT '医院具体地址';ALTER TABLE dtp_hospital MODIFY COLUMN location VARCHAR(100) DEFAULT NULL COMMENT '医院所在经纬度';ALTER TABLE dtp_hospital MODIFY COLUMN del_flag TINYINT DEFAULT 0 COMMENT '删除状态 0正常 1已删除';ALTER TABLE dtp_hospital MODIFY COLUMN create_by VARCHAR(32) DEFAULT NULL COMMENT '创建人';ALTER TABLE dtp_hospital MODIFY COLUMN create_time DATETIME DEFAULT NULL COMMENT '创建时间';ALTER TABLE dtp_hospital MODIFY COLUMN update_by VARCHAR(32) DEFAULT NULL COMMENT '更新人';ALTER TABLE dtp_hospital MODIFY COLUMN update_time DATETIME DEFAULT NULL COMMENT '更新时间';ALTER TABLE dtp_hospital MODIFY COLUMN image VARCHAR(255) DEFAULT NULL COMMENT '图片';",
+    "policy":"DDL"
+}
+-d {
+    "question":"在黄浦区的医院有哪些？",
+    "content": "SELECT * FROM DTP_HOSPITAL WHERE DISTRICT LIKE '%黄浦区%'",
+    "policy":"SQL"
+}
+
+### Text2Sql Describe Training
+GET http://127.0.0.1:7781/text2sql/describeTraining?question="ALL DTP DDL SQL DOCUMENTATION"
+
+### Text2Sql Delete Training
+DELETE http://127.0.0.1:7781/text2sql/deleteTraining/{id}
+
+### Text2Sql Chat
+POST http://127.0.0.1:7781/text2sql/chat
+-d {
+    "question":"在黄浦区的医院有哪些？"
+}
+
+
