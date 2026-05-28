@@ -1,0 +1,15 @@
+server:
+  host: localhost
+  port: 7790
+
+spring:
+  application:
+    name: "stock"
+  datasource:
+    url: jdbc:sqlite:D:/project/test-demo/stock/stock.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: false
