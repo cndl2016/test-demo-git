@@ -1,0 +1,15 @@
+server:
+  port: 7779
+
+spring:
+  application:
+    name: rag
+
+  ai:
+    openai:
+      api-key: sk-54034f01de884cfba1a05679d441e51f
+      embedding:
+        base-url: https://dashscope.aliyuncs.com/compatible-mode/
+        options:
+          model: text-embedding-v4
+        embeddings-path: /v1/embeddings

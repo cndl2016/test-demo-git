@@ -1,0 +1,19 @@
+# RAG API
+
+### RAG Simple Add
+GET http://127.0.0.1:7779/rag/simple/add
+
+### RAG Simple Delete
+GET http://127.0.0.1:7779/rag/simple/delete
+
+### RAG Simple Save
+GET http://127.0.0.1:7779/rag/simple/save
+
+### RAG Simple Load
+GET http://127.0.0.1:7779/rag/simple/load
+
+### RAG Simple Search
+GET http://127.0.0.1:7779/rag/simple/search
+
+### RAG Simple Search Filter
+GET http://127.0.0.1:7779/rag/simple/search-filter

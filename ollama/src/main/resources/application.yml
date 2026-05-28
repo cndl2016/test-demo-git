@@ -1,0 +1,24 @@
+server:
+  port: 7778
+
+spring:
+  application:
+    name: ollama
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: deepseek-r1:1.5b
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+            schema-locations: classpath:schema-mysql.sql
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/test_ollama?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&tinyInt1isBit=false&allowLoadLocalInfile=true&allowLocalInfile=true&allowUrl
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver

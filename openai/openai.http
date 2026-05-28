@@ -1,0 +1,38 @@
+# Openai Chat API
+
+### Chat Client Simple Chat
+GET http://127.0.0.1:7777/openai/chat-client/simple/chat
+
+### Chat Client Stream Chat
+GET http://127.0.0.1:7777/openai/chat-client/stream/chat
+
+### Chat Client Stream Chat Response
+GET http://127.0.0.1:7777/openai/chat-client/stream/response
+
+### Chat Client MySQL
+GET http://127.0.0.1:7777/openai/chat-client/mysql?query=你能帮我做什么？&chatId=10001
+
+### Chat Client Tool DateTime
+GET http://127.0.0.1:7777/openai/chat-client/tool/datetime
+
+### Chat Client Tool Alarm
+GET http://127.0.0.1:7777/openai/chat-client/tool/alarm
+
+
+### Chat Model Simple Chat
+GET http://127.0.0.1:7777/openai/chat-model/simple/chat
+
+### Chat Model Stream Chat
+GET http://127.0.0.1:7777/openai/chat-model/stream/chat
+
+### Chat Model Custom Options Chat
+GET http://127.0.0.1:7777/openai/chat-model/custom/chat
+
+### Chat Model Standard JSON Mode Chat
+GET http://127.0.0.1:7777/openai/chat-model/custom/chat/json-mode
+
+### Chat Model Tool DateTime
+GET http://127.0.0.1:7777/openai/chat-model/tool/datetime
+
+### Chat Model Tool Alarm
+GET http://127.0.0.1:7777/openai/chat-model/tool/alarm

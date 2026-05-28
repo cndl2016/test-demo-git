@@ -1,0 +1,158 @@
+package com.dm.cn.ragelasticsearch.config;
+
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.mapping.*;
+import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
+import co.elastic.clients.elasticsearch.indices.IndexSettings;
+import io.micrometer.common.util.StringUtils;
+import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.reader.markdown.MarkdownDocumentReader;
+import org.springframework.ai.reader.markdown.config.MarkdownDocumentReaderConfig;
+import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.ai.vectorstore.elasticsearch.autoconfigure.ElasticsearchVectorStoreProperties;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Component
+public class VectorDBInit {
+
+	private static final Logger logger = LoggerFactory.getLogger(VectorDBInit.class);
+
+	private final VectorStore vectorStore;
+
+	@Value("classpath:documents/story-1-chs.md")
+	Resource file1;
+
+	@Value("classpath:documents/story-2-chs.md")
+	Resource file2;
+
+	private final ElasticsearchClient elasticsearchClient;
+
+	private final ElasticsearchVectorStoreProperties options;
+
+	private static final String textField = "content";
+
+	private static final String vectorField = "embedding";
+
+	private static final int BATCH_SIZE = 10; // 向量数据库允许的最大批量大小:text-embedding-v4模型最大行数10
+
+	public VectorDBInit(
+			VectorStore vectorStore,
+			ElasticsearchClient elasticsearchClient,
+			ElasticsearchVectorStoreProperties options) {
+
+		this.vectorStore = vectorStore;
+		this.elasticsearchClient = elasticsearchClient;
+		this.options = options;
+	}
+
+	@PostConstruct
+	void run() {
+
+		logger.info("文档读取");
+
+		var markdownReader1 = new MarkdownDocumentReader(file1, MarkdownDocumentReaderConfig.builder()
+				.withAdditionalMetadata("location", "波兰")
+				.build());
+		List<Document> documents = new ArrayList<>(markdownReader1.get());
+
+		var markdownReader2 = new MarkdownDocumentReader(file2, MarkdownDocumentReaderConfig.builder()
+				.withAdditionalMetadata("location", "意大利")
+				.build());
+		documents.addAll(markdownReader2.get());
+
+		logger.info("创建和存储向量");
+
+		createIndexIfNotExists();
+
+		List<Document> splitDocuments = new TokenTextSplitter().split(documents);
+		// 分批添加到向量数据库
+		for (int i = 0; i < splitDocuments.size(); i += BATCH_SIZE) {
+			int toIndex = Math.min(i + BATCH_SIZE, splitDocuments.size());
+			List<Document> batch = splitDocuments.subList(i, toIndex);
+
+			try {
+				vectorStore.add(batch);
+				logger.debug("成功添加批次: {} - {}", i, toIndex);
+			} catch (Exception e) {
+				logger.error("添加批次失败: {} - {}", i, toIndex, e);
+			}
+		}
+	}
+
+	/**
+	 * 如果索引不存在则创建它
+	 */
+	private void createIndexIfNotExists() {
+		try {
+			// 获取索引名称和向量维度
+			String indexName = options.getIndexName();
+			Integer dimsLength = options.getDimensions();
+
+			// 检查索引名称是否为空
+			if (StringUtils.isBlank(indexName)) {
+				throw new IllegalArgumentException("必须提供Elasticsearch索引名称");
+			}
+
+			// 检查索引是否已存在
+			boolean exists = elasticsearchClient.indices().exists(idx -> idx.index(indexName)).value();
+			if (exists) {
+				logger.debug("索引 {} 已存在。跳过创建。", indexName);
+				return;
+			}
+
+			// 获取相似度算法名称
+			String similarityAlgo = options.getSimilarity().name();
+
+			// 设置索引配置：1个分片，1个副本
+			IndexSettings indexSettings = IndexSettings
+					.of(settings -> settings.numberOfShards(String.valueOf(1)).numberOfReplicas(String.valueOf(1)));
+
+			// 定义索引的属性映射
+			Map<String, Property> properties = new HashMap<>();
+
+			// 添加向量字段配置
+			properties.put(vectorField, Property.of(property -> property.denseVector(
+					DenseVectorProperty.of(dense -> dense.index(true).dims(dimsLength).similarity(similarityAlgo)))));
+
+			// 添加文本字段配置
+			properties.put(textField, Property.of(property -> property.text(TextProperty.of(t -> t))));
+
+			// 定义元数据字段
+			Map<String, Property> metadata = new HashMap<>();
+			metadata.put("ref_doc_id", Property.of(property -> property.keyword(KeywordProperty.of(k -> k))));
+
+			// 将元数据作为对象属性添加
+			properties.put("metadata", Property.of(property -> property.object(ObjectProperty.of(op -> op.properties(metadata)))));
+
+			// 创建索引
+			CreateIndexResponse indexResponse = elasticsearchClient.indices()
+					.create(createIndexBuilder -> createIndexBuilder.index(indexName)
+							.settings(indexSettings)
+							.mappings(TypeMapping.of(mappings -> mappings.properties(properties))));
+
+			// 检查索引是否创建成功
+			if (!indexResponse.acknowledged()) {
+				throw new RuntimeException("创建索引失败");
+			}
+
+			logger.info("成功创建Elasticsearch索引 {}", indexName);
+		}
+		catch (IOException e) {
+			logger.error("创建索引失败", e);
+			throw new RuntimeException(e);
+		}
+	}
+
+}

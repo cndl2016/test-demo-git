@@ -1,0 +1,25 @@
+# Ollama Chat API
+
+### Chat Client Simple Chat
+GET http://127.0.0.1:7778/ollama/chat-client/simple/chat
+
+### Chat Client Stream Chat
+GET http://127.0.0.1:7778/ollama/chat-client/stream/chat
+
+### Chat Client Stream Chat Response
+GET http://127.0.0.1:7778/ollama/chat-client/stream/response
+
+### Chat Client MySQL
+GET http://127.0.0.1:7778/ollama/chat-client/mysql?query=你能帮我做什么？&chatId=10002
+
+
+
+
+### Chat Model Simple Chat
+GET http://127.0.0.1:7778/ollama/chat-model/simple/chat
+
+### Chat Model Stream Chat
+GET http://127.0.0.1:7778/ollama/chat-model/stream/chat
+
+### Chat Model Custom Options Chat
+GET http://127.0.0.1:7778/ollama/chat-model/custom/chat

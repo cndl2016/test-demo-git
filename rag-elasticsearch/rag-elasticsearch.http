@@ -1,0 +1,46 @@
+# RAG ElasticSearch API
+
+### RAG Vector Add
+POST http://127.0.0.1:7780/rag/vector/add
+-d {
+    "filePath":"D:\\project\\SpringAI\\rag-elasticsearch\\src\\main\\resources\\documents\\story-1-chs.md",
+    "chunkSize": 100,
+    "keepSeparator": true,
+    "delimiters": ["。",".","！","!","；",";"],
+    "ignoreWhitespace": true,
+    "overlap": 0
+}
+
+### RAG Vector Query
+POST http://127.0.0.1:7780/rag/vector/query
+-d {
+    "source":"story-1-chs.md",
+    "location": "波兰",
+    "refDocId": "fcd4f220-b6c0-4992-8f48-fe904a21721f",
+    "pageIndex": 0,
+    "pageSize": 100
+}
+
+### RAG Vector Delete
+POST http://127.0.0.1:7780/rag/vector/delete
+-d spring-ai-1
+
+### RAG ElasticSearch Base
+GET http://127.0.0.1:7780/rag/elasticsearch/basic?prompt="Who are the characters going on an adventure in the North Pole?"
+
+### RAG ElasticSearch Memory
+POST http://127.0.0.1:7780/rag/elasticsearch/memory/{chatId}
+-d {"prompt": "Who are the characters going on an adventure in the North Pole?"}
+-d {"prompt": "What places do they visit?"}
+
+### RAG ElasticSearch Compression
+POST http://127.0.0.1:7780/rag/elasticsearch/compression/{chatId}
+-d {"prompt": "Who are the characters going on an adventure in the North Pole?"}
+
+### RAG ElasticSearch Rewrite
+POST http://127.0.0.1:7780/rag/elasticsearch/rewrite
+-d {"prompt": "Who are the characters going on an adventure in the North Pole?"}
+
+### RAG ElasticSearch Translation
+POST http://127.0.0.1:7780/rag/elasticsearch/translation
+-d {"prompt": "正在北极进行冒险的角色有哪些？"}

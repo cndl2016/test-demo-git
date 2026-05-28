@@ -1,0 +1,19 @@
+# RAG MILVUS API
+
+### RAG Simple Add
+GET http://127.0.0.1:7782/rag/milvus/add
+
+### RAG Simple Update
+GET http://127.0.0.1:7782/rag/milvus/update
+
+### RAG Simple Delete
+GET http://127.0.0.1:7782/rag/milvus/delete
+
+### RAG Simple Load
+GET http://127.0.0.1:7782/rag/milvus/load
+
+### RAG Simple Search
+GET http://127.0.0.1:7782/rag/milvus/search
+
+### RAG Simple Search Filter
+GET http://127.0.0.1:7782/rag/milvus/search-filter
